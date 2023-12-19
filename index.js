@@ -4,6 +4,7 @@ const cors = require('cors');
 let persons = require('./data.json');
 
 const app = express();
+app.use(express.static('build'));
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
