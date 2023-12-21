@@ -13,7 +13,7 @@ app.use(express.static('build'));
 app.use(express.json());
 app.use(cors());
 
-morgan.token('data', function (req, res) {
+morgan.token('data', function (req) {
   if (Object.keys(req.body).length === 0) {
     return null;
   }
@@ -42,7 +42,7 @@ const dbConnection = () => {
 
   mongoose
     .connect(mongoURL)
-    .then((result) => {
+    .then(() => {
       console.log('connected to MongoDB');
     })
     .catch((error) => {
@@ -112,7 +112,7 @@ app.post('/api/persons', (req, res) => {
         name: req.body.name,
         number: req.body.number,
       });
-      newPerson.save().then((response) => {
+      newPerson.save().then(() => {
         return res.status(201).json(newPerson);
       });
     })
